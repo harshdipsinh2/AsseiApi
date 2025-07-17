@@ -1,0 +1,4 @@
+@AssetManagementAPI_HostAddress = http://localhost:7164
+
+GET {{AssetManagementAPI_HostAddress}}/AssetManagementAPI/
+Accept: application/json

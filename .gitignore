@@ -1,0 +1,15 @@
+# Ignore user secrets and config files with sensitive data
+appsettings.json
+appsettings.*.json
+
+# Optional: ignore published builds, logs, etc.
+
+*.log
+.env
+# Ignore Visual Studio folder
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.DS_Store
