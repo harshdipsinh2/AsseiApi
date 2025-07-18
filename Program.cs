@@ -136,7 +136,6 @@ app.UseSwaggerUI(c =>
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Asset Management API v1");
 });
 
-app.UseHttpsRedirection();
 
 app.UseCors(MyAllowSpecificOrigins);
 
