@@ -55,12 +55,17 @@ builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Str
 
 
 // Enable CORS for React Frontend 
+// ✅ CORS Policy
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll",
-        policy => policy.AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader());
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.AllowAnyOrigin()
+                                .AllowAnyHeader()
+                                .AllowAnyMethod();
+                      });
 });
 
 // Configure Authentication with JWT
