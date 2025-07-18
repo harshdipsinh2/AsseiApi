@@ -6,15 +6,13 @@ EXPOSE 443
 
 # SDK image to build app
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /app
-
-
+WORKDIR /src
 
 COPY . .
-WORKDIR /src/AssetManagement
+
 RUN dotnet restore "AssetManagement.csproj"
 RUN dotnet build "AssetManagement.csproj" -c Release -o /app/build
-RUN dotnet publish "AssetManagement.csproj" -c Release -o /app/publish 
+RUN dotnet publish "AssetManagement.csproj" -c Release -o /app/publish
 
 # Final runtime image
 FROM base AS final
@@ -22,5 +20,3 @@ WORKDIR /app
 COPY --from=build /app/publish .
 
 ENTRYPOINT ["dotnet", "AssetManagement.dll"]
-
-
