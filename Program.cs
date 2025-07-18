@@ -10,6 +10,8 @@ using System.Text;
 using AssetManagement.Configurations;
 using AssetManagement.Repository;
 
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Load Stripe Secret Key from appsettings.json
@@ -21,8 +23,19 @@ if (string.IsNullOrEmpty(stripeSecretKey))
 StripeConfiguration.ApiKey = stripeSecretKey;
 
 // Database Context
+//builder.Services.AddDbContext<AppDbContext>(options =>
+//    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseMySql(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))
+    )
+);
+
+builder.Configuration
+    .AddEnvironmentVariables()
+    .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
 // Register Repositories
 builder.Services.AddScoped<IUserRepository, UserRepository>();
