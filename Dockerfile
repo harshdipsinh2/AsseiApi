@@ -11,7 +11,7 @@ WORKDIR /app
 
 
 COPY . .
-WORKDIR /app/AssetManagement
+WORKDIR /src/AssetManagement
 RUN dotnet restore "AssetManagement.csproj"
 RUN dotnet build "AssetManagement.csproj" -c Release -o /app/build
 RUN dotnet publish "AssetManagement.csproj" -c Release -o /app/publish 
