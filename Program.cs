@@ -127,9 +127,7 @@ builder.Services.AddSwaggerGen(c =>
         }
     });
 });
-
-var app = builder.Build();
-
+ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -139,14 +137,15 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-
 app.UseCors(MyAllowSpecificOrigins);
-
 app.UseRouting();
-
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.MapGet("/", () => "🚀 Asset API is running!"); // ✅ Add this
 app.MapControllers();
+
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080"; // ✅ Add this
+app.Urls.Add($"http://*:{port}");
 
 app.Run();
