@@ -62,9 +62,12 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       policy =>
                       {
-                          policy.AllowAnyOrigin()
-                                .AllowAnyHeader()
-                                .AllowAnyMethod();
+                          policy.WithOrigins(
+                              "https://asset-management-tailor-management.vercel.app",
+                              "https://asset-management-git-main-tailor-management.vercel.app"
+                          )
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
                       });
 });
 
