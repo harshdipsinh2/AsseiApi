@@ -127,6 +127,11 @@ namespace AssetManagement.Data
                 .ToTable("tb_Companies")
                 .HasKey(c => c.CompanyID);
 
+            modelBuilder.Entity<Company>()
+    .Property(c => c.CompanyID)
+    .ValueGeneratedOnAdd();
+
+
             modelBuilder.Entity<Employee>()
                 .HasOne(e => e.Company)
                 .WithMany(c => c.Employees)
